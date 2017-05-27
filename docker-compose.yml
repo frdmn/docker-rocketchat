@@ -7,7 +7,7 @@ services:
     command: /bin/sh -c 'INSTANCE_IP=$$(hostname -i) node main.js'
     mem_limit: 4G
     volumes:
-     - ./uploads:/app/uploads
+     - ./data/uploads:/app/uploads
      - /tmp:/tmp
     environment:
      - PORT=3000
@@ -25,7 +25,7 @@ services:
     restart: unless-stopped
     command: mongod --smallfiles --oplogSize 128 --replSet rs0
     volumes:
-      - ./data/runtime/db:/data/db
+      - ./data/db:/data/db
       - ./data/backup:/dump
 
   mongo-init-replica:

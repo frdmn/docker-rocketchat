@@ -1,3 +1,7 @@
 # Don't track MongoDB runtime files
 data/db/*
 !data/db/.gitkeep
+
+# ... user upload files
+data/uploads/*
+!data/uploads/.gitkeep

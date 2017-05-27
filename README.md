@@ -12,7 +12,12 @@ My `docker-compose.yml` file/setup to run [Rocket.Chat](https://rocket.chat) in 
 	cd /opt/Rocket.Chat-docker
 	```
 
-4. Read the Usage instructions in case you need to customize the default setup/stack.
+4. Read the [Usage instructions](#usage) in case you need to customize the default setup/stack and copy the sample `docker-compose.yml`:
+
+	```
+	cp docker-compose.sample.yml docker-compose.yml
+	```
+
 3. Create and start up containers using `docker-compose`:
 
 	```

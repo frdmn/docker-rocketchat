@@ -2,6 +2,10 @@
 data/db/*
 !data/db/.gitkeep
 
+# ... Hubot scripts
+data/hubotscripts/*
+!data/hubotscripts/.gitkeep
+
 # ... user upload files
 data/uploads/*
 !data/uploads/.gitkeep

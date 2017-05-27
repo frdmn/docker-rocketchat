@@ -71,7 +71,29 @@ You probably already noticed the `mongo-init-replica` container. It is necessary
 
 #### Backup and restore
 
-(soon)
+##### Create a backup
+
+You can use the provided backup script (`opt/mongo-backup-rotate.sh`) to periodically backup your MongoDB:
+
+```
+$ DAYS_TO_KEEP=7 MONGO_CONTAINER=rocketchatdocker_mongo_1 BACKUP_DIR=/opt/Rocket.Chat-docker/data/backups /opt/Rocket.Chat-docker/opt/mongo-backup-rotate.sh
+```
+
+You can use the following environment variables:
+
+- `DAYS_TO_KEEP`: Days to keep backup dumps, then starts recyling them
+- `MONGO_CONTAINER`: The exact name of the mongo container (use `docker ps` to find out)
+- `BACKUP_DIR`: The directory to write the dumps to
+
+##### Restore a backup dump
+
+To restore a backup dump, pick one from `data/backups` and run the following Docker exec command:
+
+```
+$ docker exec -it rocketchatdocker_mongo_1 mongorestore --archive=/dump/<FILENAME> --gzip
+```
+
+Where `<FILENAME>` is the filename of the dump you want to restore.
 
 ## Contributing
 

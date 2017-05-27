@@ -1,10 +1,10 @@
 # docker-rocketchat
 
-My `docker-compose.yml` file to run [Rocket.Chat](https://rocket.chat) in production.
+My `docker-compose.yml` file/setup to run [Rocket.Chat](https://rocket.chat) in production.
 
 ## Installation
 
-1. Make sure you've installed all requirements
+1. Make sure you've installed Docker including `docker-compose` support.
 2. Clone this repository:
 
 	```shell
@@ -12,7 +12,8 @@ My `docker-compose.yml` file to run [Rocket.Chat](https://rocket.chat) in produc
 	cd docker-rocketchat
 	```
 
-3. Start containers using `docker-compose`:
+4. Read the Usage instructions in case you need to customize the default setup/stack.
+3. Create and start up containers using `docker-compose`:
 
 	```
 	docker-compose up -d

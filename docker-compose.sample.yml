@@ -26,7 +26,7 @@ services:
     command: mongod --smallfiles --oplogSize 128 --replSet rs0
     volumes:
       - ./data/db:/data/db
-      - ./data/backup:/dump
+      - ./data/backups:/dump
 
   mongo-init-replica:
     image: mongo:3.2

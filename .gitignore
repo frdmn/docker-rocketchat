@@ -9,3 +9,10 @@ data/hubotscripts/*
 # ... user upload files
 data/uploads/*
 !data/uploads/.gitkeep
+
+# ... backups
+data/backups/*
+!data/backups/.gitkeep
+
+# Your custom docker-compose.yml file
+docker-compose.yml

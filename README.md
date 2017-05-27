@@ -19,6 +19,60 @@ My `docker-compose.yml` file/setup to run [Rocket.Chat](https://rocket.chat) in 
 	docker-compose up -d
 	```
 
+## Usage
+
+### Why port 3000? How to add SSL?
+
+Port 3000, because we have our own dedicated load balancer container in this stack which is exposed on port 3000. This load balancer manages the traffic between our application containers, no matter how many we scale up.
+
+In production you probably want to use the default HTTP/HTTPS ports, to do that simply add your reverse proxy by choice and redirect the traffic to the _traeffik_ listener. This reverse proxy can also be used to terminate your SSL connections.
+
+### Scaling in case of performance issues
+
+This service file supports the `docker-compose` builtin scaling. For example to add 3 additional application containers you can simply invoke:
+
+```
+$ docker-compose scale rocketchat=4
+Creating and starting dev_rocketchat_2 ... done
+Creating and starting dev_rocketchat_3 ... done
+Creating and starting dev_rocketchat_4 ... done
+```
+
+Last but not least restart your stack to let _traeffik_ (our load balancer container) know about the newly added application containers:
+
+```
+$ docker-compose restart
+```
+
+### Hubot
+
+#### Installation / Setup
+
+If you want to use Hubot, you can use the provided container in the `docker-compose.yml`:
+
+1. Create a new user in your Rocket.Chat instance which Hubot can use to sign in.
+2. Go to your `docker-compose.yml` and comment out the Hubot service at the very bottom. (Remove the `#` signs)
+3. Adjust the `ROCKETCHAT_USER` and `ROCKETCHAT_PASSWORD` environment variables to match your previously created user credentials.
+4. Save the file and create the Hubot container:
+
+	```
+	docker-compose up -d hubot
+	```
+
+#### Custom Hubot scripts
+
+Right now you can either use the `EXTERNAL_SCRIPTS` environment variable within the Hubot Docker container to install NPM-registered scripts or you can use the mounted `./data/hubotscripts` volume to load your local scripts. 
+
+### MongoDB
+
+#### Replica set?
+
+You probably already noticed the `mongo-init-replica` container. It is necessary to create the replica set in your MongoDB container and executed only once when you spin up the `docker-compose.yml` file initially. The replica set is necessary to run Rocket.Chat across several instances. (see [Scaling](#scaling-in-case-of-performance-issues))
+
+#### Backup and restore
+
+(soon)
+
 ## Contributing
 
 1. Fork it

@@ -8,8 +8,8 @@ My `docker-compose.yml` file/setup to run [Rocket.Chat](https://rocket.chat) in 
 2. Clone this repository:
 
 	```shell
-	git clone https://github.com/frdmn/docker-rocketchat
-	cd docker-rocketchat
+	git clone https://github.com/frdmn/docker-rocketchat /opt/Rocket.Chat-docker
+	cd /opt/Rocket.Chat-docker
 	```
 
 4. Read the Usage instructions in case you need to customize the default setup/stack.

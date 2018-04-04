@@ -11,12 +11,12 @@ services:
      - /tmp:/tmp
     environment:
      - PORT=3000
-     - ROOT_URL=http://rocketchat.dev
+     - ROOT_URL=http://${ROCKETCHAT_HOST}
      - MONGO_URL=mongodb://mongo:27017/rocketchat
      - MONGO_OPLOG_URL=mongodb://mongo:27017/local
     labels:
       - "traefik.backend=rocketchat"
-      - "traefik.frontend.rule=Host: rocketchat.dev"
+      - "traefik.frontend.rule=Host: ${ROCKETCHAT_HOST}"
     depends_on:
       - mongo
 

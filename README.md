@@ -7,22 +7,29 @@ My `docker-compose.yml` file/setup to run [Rocket.Chat](https://rocket.chat) in 
 1. Make sure you've installed Docker including `docker-compose` support.
 2. Clone this repository:
 
-	```shell
-	git clone https://github.com/frdmn/docker-rocketchat /opt/Rocket.Chat-docker
-	cd /opt/Rocket.Chat-docker
-	```
+```shell
+git clone https://github.com/frdmn/docker-rocketchat /opt/Rocket.Chat-docker
+cd /opt/Rocket.Chat-docker
+```
+
+3. Copy and adjust the default environment variables from `.env.sample`:
+
+```shell
+cp .env.sample .env
+vi .env
+```
 
 4. Read the [Usage instructions](#usage) in case you need to customize the default setup/stack and copy the sample `docker-compose.yml`:
 
-	```
-	cp docker-compose.sample.yml docker-compose.yml
-	```
+```
+cp docker-compose.sample.yml docker-compose.yml
+```
 
-3. Create and start up containers using `docker-compose`:
+5. Create and start up containers using `docker-compose`:
 
-	```
-	docker-compose up -d
-	```
+```
+docker-compose up -d
+```
 
 ## Usage
 

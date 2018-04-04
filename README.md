@@ -19,13 +19,7 @@ cp .env.sample .env
 vi .env
 ```
 
-4. Read the [Usage instructions](#usage) in case you need to customize the default setup/stack and copy the sample `docker-compose.yml`:
-
-```
-cp docker-compose.sample.yml docker-compose.yml
-```
-
-5. Create and start up containers using `docker-compose`:
+4. Create and start up containers using `docker-compose`:
 
 ```
 docker-compose up -d
@@ -63,13 +57,13 @@ $ docker-compose restart
 If you want to use Hubot, you can use the provided container in the `docker-compose.yml`:
 
 1. Create a new user in your Rocket.Chat instance which Hubot can use to sign in.
-2. Go to your `docker-compose.yml` and comment out the Hubot service at the very bottom. (Remove the `#` signs)
-3. Adjust the `ROCKETCHAT_USER` and `ROCKETCHAT_PASSWORD` environment variables to match your previously created user credentials.
+2. Open the `docker-compose.yml` and uncomment the Hubot service at the very bottom. (Remove the `#` signs)
+3. Adjust the related environment variables in your `.env` file to match your previously created user credentials.
 4. Save the file and create the Hubot container:
 
-	```
-	docker-compose up -d hubot
-	```
+```
+docker-compose up -d hubot
+```
 
 #### Custom Hubot scripts
 
@@ -88,7 +82,10 @@ You probably already noticed the `mongo-init-replica` container. It is necessary
 You can use the provided backup script (`opt/mongo-backup-rotate.sh`) to periodically backup your MongoDB:
 
 ```
-$ DAYS_TO_KEEP=7 MONGO_CONTAINER=rocketchatdocker_mongo_1 BACKUP_DIR=/opt/Rocket.Chat-docker/data/backups /opt/Rocket.Chat-docker/opt/mongo-backup-rotate.sh
+$ DAYS_TO_KEEP=7 \
+  MONGO_CONTAINER=rocketchatdocker_mongo_1 \
+  BACKUP_DIR=/opt/Rocket.Chat-docker/data/backups \
+  /opt/Rocket.Chat-docker/opt/mongo-backup-rotate.sh
 ```
 
 You can use the following environment variables:
@@ -112,21 +109,21 @@ Where `<FILENAME>` is the filename of the dump you want to restore.
 1. Fork it
 2. Create your feature branch:
 
-	```shell
-	git checkout -b feature/my-new-feature
-	```
+```shell
+git checkout -b feature/my-new-feature
+```
 
 3. Commit your changes:
 
-	```shell
-	git commit -am 'Add some feature'
-	```
+```shell
+git commit -am 'Add some feature'
+```
 
 4. Push to the branch:
 
-	```shell
-	git push origin feature/my-new-feature
-	```
+```shell
+git push origin feature/my-new-feature
+```
 
 5. Submit a pull request
 

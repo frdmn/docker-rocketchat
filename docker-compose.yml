@@ -44,21 +44,21 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
-#  hubot:
-#    image: rocketchat/hubot-rocketchat:1.0.8
-#    restart: unless-stopped
-#    environment:
-#      - ROCKETCHAT_URL=rocketchat:3000
-#      - ROCKETCHAT_ROOM=GENERAL
-#      - ROCKETCHAT_USER=hubot
-#      - ROCKETCHAT_PASSWORD=your-random-pass
-#      - BOT_NAME=hubot
-#      - EXTERNAL_SCRIPTS=hubot-iwelt-mongodb-brain,hubot-help,hubot-isup,hubot-memes
-#      - MONGODB_URL=mongodb://mongo:27017/hubot-brain
-#      - TZ=/usr/share/zoneinfo/Europe/Berlin
-#    links:
-#      - rocketchat:rocketchat
-#    volumes:
-#      - ./data/hubotscripts:/home/hubot/scripts
-#    ports:
+# hubot:
+#   image: rocketchat/hubot-rocketchat:1.0.8
+#   restart: unless-stopped
+#   environment:
+#     - MONGODB_URL=mongodb://mongo:27017/hubot-brain
+#     - ROCKETCHAT_URL=rocketchat:3000
+#     - ROCKETCHAT_ROOM=${ROCKETCHAT_ROOM}
+#     - ROCKETCHAT_USER=${ROCKETCHAT_USER}
+#     - ROCKETCHAT_PASSWORD=${ROCKETCHAT_PASSWORD}
+#     - BOT_NAME=${BOT_NAME}
+#     - EXTERNAL_SCRIPTS=${EXTERNAL_SCRIPTS}
+#     - TZ=${/usr/share/zoneinfo/Europe/Berlin}
+#   links:
+#     - rocketchat:rocketchat
+#   volumes:
+#     - ./data/hubotscripts:/home/hubot/scripts
+#   ports:
 #     - 3001:8081

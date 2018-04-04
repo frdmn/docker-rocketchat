@@ -58,7 +58,6 @@ services:
 #      - TZ=/usr/share/zoneinfo/Europe/Berlin
 #    links:
 #      - rocketchat:rocketchat
-#      - mongo:mongo
 #    volumes:
 #      - ./data/hubotscripts:/home/hubot/scripts
 #    ports:

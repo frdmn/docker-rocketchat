@@ -16,3 +16,6 @@ data/backups/*
 
 # The adjusted docker-compose.yml file
 docker-compose.yml
+
+# Environment variables
+.env

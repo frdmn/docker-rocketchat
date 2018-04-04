@@ -14,5 +14,5 @@ data/uploads/*
 data/backups/*
 !data/backups/.gitkeep
 
-# Your custom docker-compose.yml file
+# The adjusted docker-compose.yml file
 docker-compose.yml

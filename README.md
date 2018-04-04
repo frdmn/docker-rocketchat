@@ -8,8 +8,8 @@ My `docker-compose.yml` file/setup to run [Rocket.Chat](https://rocket.chat) in 
 2. Clone this repository:
 
 ```shell
-git clone https://github.com/frdmn/docker-rocketchat /opt/Rocket.Chat-docker
-cd /opt/Rocket.Chat-docker
+git clone https://github.com/frdmn/docker-rocketchat /opt/docker/Rocket.Chat
+cd /opt/docker/Rocket.Chat
 ```
 
 3. Copy and adjust the default environment variables from `.env.sample`:
@@ -79,24 +79,23 @@ You probably already noticed the `mongo-init-replica` container. It is necessary
 
 ##### Create a backup
 
-You can use the provided backup script (`./scripts/mongo-backup-rotate.sh`) to periodically backup your MongoDB and also rotate/remove old backups:
+You can use the provided backup script (`./scripts/export-mongo-dump.sh`) to export (and compress if passing `GZIP` environment variable) your MongoDB:
 
 ```
-$ ./scripts/mongo-backup-rotate.sh
+$ GZIP=true ./scripts/export-mongo-dump.sh
 ```
 
 You can also make use of the following environment variables, in case you've customized the `docker-compose.yml`:
 
-- `DAYS_TO_KEEP`: Days to keep backup dumps, then starts recyling them
 - `MONGO_CONTAINER`: The exact name of the mongo container (use `docker ps` to find out)
-- `BACKUP_DIR`: The directory to write the dumps to
 
 ```
-$ DAYS_TO_KEEP=7 \
-  MONGO_CONTAINER=mongo \
-  BACKUP_DIR=./data/backups \
-  ./scripts/mongo-backup-rotate.sh
+$ MONGO_CONTAINER=mongo \
+  GZIP=true
+  ./scripts/export-mongo-dump.sh
 ```
+
+The backups will be written to the `./data/backups` directory.
 
 ##### Restore a backup dump
 

@@ -85,13 +85,14 @@ You can use the provided backup script (`./scripts/export-mongo-dump.sh`) to exp
 $ GZIP=true ./scripts/export-mongo-dump.sh
 ```
 
-You can also make use of the following environment variables, in case you've customized the `docker-compose.yml`:
+You can also make use of the following environment variables:
 
-- `MONGO_CONTAINER`: The exact name of the mongo container (use `docker ps` to find out)
+- `MONGO_CONTAINER`: The exact name of the mongo container (defaults to `mongo`)
+- `GZIP`: Set to `true` if you want to compress your export
 
 ```
 $ MONGO_CONTAINER=mongo \
-  GZIP=true
+  GZIP=true \
   ./scripts/export-mongo-dump.sh
 ```
 
@@ -99,13 +100,20 @@ The backups will be written to the `./data/backups` directory.
 
 ##### Restore a backup dump
 
-To restore a backup dump, pick one from `data/backups` and run the following Docker exec command:
+To restore a backup dump, pick or place one in `data/backups` and run the following script:
 
 ```
-$ docker-compose run mongo mongorestore -h mongo --archive=/dump/<FILENAME> 
+$ IMPORTFILE=<FILENAME> \
+  GZIP=true \
+  ./scripts/import-mongo-dump.sh
 ```
 
-Where `<FILENAME>` is the filename (timestamp) of the dump you want to restore.
+You can also make use of the following environment variables:
+
+- `IMPORTFILE`: The filename of the dump that you want to import
+- `GZIP`: Set to `true` if you want to compress your export
+
+```
 
 ## Contributing
 

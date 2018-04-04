@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
-#
-# Backup:  $ docker-compose run mongo mongodump -h mongo --archive=/dump/201804050001
-# Restore: $ docker-compose run mongo mongorestore -h mongo --archive=/dump/201804050001 --gzip
-
 CURRENTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 ${DAYS_TO_KEEP:=6}

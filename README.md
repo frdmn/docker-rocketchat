@@ -79,10 +79,10 @@ You probably already noticed the `mongo-init-replica` container. It is necessary
 
 ##### Create a backup
 
-You can use the provided backup script (`./opt/mongo-backup-rotate.sh`) to periodically backup your MongoDB and also rotate/remove old backups:
+You can use the provided backup script (`./scripts/mongo-backup-rotate.sh`) to periodically backup your MongoDB and also rotate/remove old backups:
 
 ```
-$ ./opt/mongo-backup-rotate.sh
+$ ./scripts/mongo-backup-rotate.sh
 ```
 
 You can also make use of the following environment variables, in case you've customized the `docker-compose.yml`:
@@ -95,7 +95,7 @@ You can also make use of the following environment variables, in case you've cus
 $ DAYS_TO_KEEP=7 \
   MONGO_CONTAINER=mongo \
   BACKUP_DIR=./data/backups \
-  ./opt/mongo-backup-rotate.sh
+  ./scripts/mongo-backup-rotate.sh
 ```
 
 ##### Restore a backup dump

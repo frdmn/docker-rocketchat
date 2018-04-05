@@ -55,7 +55,7 @@ services:
 #     - ROCKETCHAT_PASSWORD=${ROCKETCHAT_PASSWORD}
 #     - BOT_NAME=${BOT_NAME}
 #     - EXTERNAL_SCRIPTS=${EXTERNAL_SCRIPTS}
-#     - TZ=${/usr/share/zoneinfo/Europe/Berlin}
+#     - TZ=${TZ}
 #   links:
 #     - rocketchat:rocketchat
 #   volumes:

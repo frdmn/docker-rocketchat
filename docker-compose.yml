@@ -2,7 +2,7 @@ version: '2'
 
 services:
   rocketchat:
-    image: rocketchat/rocket.chat:0.63.0
+    image: rocketchat/rocket.chat:0.63.1
     restart: unless-stopped
     command: /bin/sh -c 'INSTANCE_IP=$$(hostname -i) node main.js'
     mem_limit: 4G

@@ -29,9 +29,9 @@ docker-compose up -d
 
 ### Why port 3000? How to add SSL?
 
-Port 3000, because we have our own dedicated load balancer container in this stack which is exposed on port 3000. This load balancer manages the traffic between our application containers, no matter how many we scale up.
+Port 3000, because this project comes with a load balancer container which is exposed on port 3000. This load balancer manages the traffic between our application containers, no matter how many we scale up.
 
-In production you probably want to use the default HTTP/HTTPS ports, to do that simply add your reverse proxy by choice and redirect the traffic to the _traeffik_ listener. This reverse proxy can also be used to terminate your SSL connections.
+In production you probably still want to use the default HTTP/HTTPS ports, right? To do that simply add your reverse proxy by choice and redirect the traffic to the _traefik_ listener. This reverse proxy can also be used to terminate your SSL connections.
 
 ### Upgrade to a new Rocket.Chat version
 
@@ -58,10 +58,10 @@ Creating and starting dev_rocketchat_3 ... done
 Creating and starting dev_rocketchat_4 ... done
 ```
 
-Last but not least restart your stack to let _traeffik_ (our load balancer container) know about the newly added application containers:
+Last but not least restart _traefik_ (the load balancer) to make sure it knows about the newly added application containers:
 
 ```
-$ docker-compose restart
+$ docker-compose restart traefik
 ```
 
 ### Hubot

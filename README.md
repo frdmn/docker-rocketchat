@@ -33,6 +33,20 @@ Port 3000, because we have our own dedicated load balancer container in this sta
 
 In production you probably want to use the default HTTP/HTTPS ports, to do that simply add your reverse proxy by choice and redirect the traffic to the _traeffik_ listener. This reverse proxy can also be used to terminate your SSL connections.
 
+### Upgrade to a new Rocket.Chat version
+
+To update your Rocket.Chat server you simply need to make sure the `docker-compose.yml` reflects the version you're trying to update to (\*),  pull the new image from Docker hub, stop and destroy your existing application container and recreate them:
+
+```
+git pull
+docker-compose pull rocketchat
+docker-compose stop rocketchat
+docker-compose rm rocketchat
+docker-compose up -d rocketchat
+```
+
+<sub>_(* I will update this (git tracked) `docker-compose.yml` file according to new Rocket.Chat releases.)_</sub>
+
 ### Scaling in case of performance issues
 
 This service file supports the `docker-compose` builtin scaling. For example to add 3 additional application containers you can simply invoke:

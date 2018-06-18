@@ -12,6 +12,10 @@
 
 export PATH="/usr/local/bin:/usr/bin:/bin"
 
+echod() {
+    printf "[`date`] $1\n"
+}
+
 TIMER_START=$(date +%s)
 COMPOSE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
 
@@ -22,7 +26,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 elif [[ "$OSTYPE" == "linux"* ]]; then
     DATE_STAMP=$(date -d "now - ${DELETE_OLDER_THAN_DAYS} day" +"%Y-%m-%dT%H:%M:%SZ")
 else
-    echo "Error: not supported operating system"
+    echod "Error: not supported operating system"
     exit 1
 fi
 
@@ -41,13 +45,13 @@ db.rocketchat_uploads.find({
 RESULT_ARRAY=$(docker-compose -f ${COMPOSE_DIR}/docker-compose.yml run --rm mongo mongo "mongo/rocketchat" --quiet --eval "${MONGO_QUERY}" | todos |    jq -r '.[] | ._id + "." + .extension') # pass to "todos" because jq expects windows line breaks???
 
 if [[ ${#RESULT_ARRAY} < 1 ]]; then
-    echo "Info: no uploads found"
+    echod "Info: no uploads found"
     exit 0
 fi
 
 RESULT_COUNT=$(echo "${RESULT_ARRAY}" | wc -l | xargs) # xargs to trim whitespaces
 
-echo "Found ${RESULT_COUNT} entry/entries..."
+echod "Found ${RESULT_COUNT} entry/entries..."
 
 if [[ -n "${RESULT_ARRAY}" ]]; then
     while read -r RESULT; do
@@ -63,12 +67,12 @@ if [[ -n "${RESULT_ARRAY}" ]]; then
             rm -v "${COMPOSE_DIR}/data/uploads/${UPLOAD_ID}"* &> /dev/null
             RM_REMOVE_RETURNCODE=$?
             if [[ ${RM_REMOVE_RETURNCODE} == 0 ]]; then
-                echo "Successfully removed upload \"${UPLOAD_ID}\" from FileSystem"
+                echod "Successfully removed upload \"${UPLOAD_ID}\" from FileSystem"
             else
-                echo "Failed to remove upload \"${UPLOAD_ID}\" from FileSystem"
+                echod "Failed to remove upload \"${UPLOAD_ID}\" from FileSystem"
             fi
-            echo "Failed to remove upload \"${UPLOAD_ID}\" from MongoDB"
         else
+            echod "Failed to remove upload \"${UPLOAD_ID}\" from MongoDB"
         fi
     done <<< "${RESULT_ARRAY}"
 fi

@@ -63,7 +63,7 @@ if [[ -n "${RESULT_ARRAY}" ]]; then
         MONGO_REMOVE_RETURNCODE=$?
 
         if [[ ${MONGO_REMOVE_RETURNCODE} == 0 ]]; then
-            echo "Successfully removed upload \"${UPLOAD_ID}\" from MongoDB"
+            echod "Successfully removed upload \"${UPLOAD_ID}\" from MongoDB"
             rm -v "${COMPOSE_DIR}/data/uploads/${UPLOAD_ID}"* &> /dev/null
             RM_REMOVE_RETURNCODE=$?
             if [[ ${RM_REMOVE_RETURNCODE} == 0 ]]; then

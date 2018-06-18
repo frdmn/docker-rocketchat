@@ -2,10 +2,10 @@
 # Script to remove old uploads in Rocket.Chat instances for people using the filesystem storage method.
 # This script makes sure to NOT remove users avatars. Because they are stored in the same directory we
 # have to query the Mongo to check if a file is a regular file upload or a avatar.
-# 
-# Env vars: 
+#
+# Env vars:
 #   - DELETE_OLDER_THAN_DAYS (defaults to 5)
-# 
+#
 # Written by: Jonas "frdmn" Friedmann <j@frd.mn>
 # Requirements: mongo (cli), docker-compose, jq, tofrodos package
 # Licensed under MIT
@@ -36,7 +36,7 @@ db.rocketchat_uploads.find({
 }).toArray()
 """
 
-RESULT_ARRAY=$(docker-compose -f ${COMPOSE_DIR}/docker-compose.yml run --rm mongo mongo "mongo/rocketchat" --quiet --eval "${MONGO_QUERY}" | todos | jq -r '.[] | ._id + "." + .extension') # pass to "todos" because jq expects windows line breaks???
+RESULT_ARRAY=$(docker-compose -f ${COMPOSE_DIR}/docker-compose.yml run --rm mongo mongo "mongo/rocketchat" --quiet --eval "${MONGO_QUERY}" | todos |    jq -r '.[] | ._id + "." + .extension') # pass to "todos" because jq expects windows line breaks???
 
 if [[ ${#RESULT_ARRAY} < 1 ]]; then
     echo "Info: no uploads found"
@@ -65,8 +65,8 @@ if [[ -n "${RESULT_ARRAY}" ]]; then
             else
                 echo "Failed to remove upload \"${UPLOAD_ID}\" from FileSystem"
             fi
-        else 
             echo "Failed to remove upload \"${UPLOAD_ID}\" from MongoDB"
+        else
         fi
     done <<< "${RESULT_ARRAY}"
 fi

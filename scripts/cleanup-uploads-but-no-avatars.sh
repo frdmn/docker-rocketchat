@@ -10,6 +10,8 @@
 # Requirements: mongo (cli), docker-compose, jq, tofrodos package
 # Licensed under MIT
 
+export PATH="/usr/local/bin:/usr/bin:/bin"
+
 TIMER_START=$(date +%s)
 COMPOSE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
 

@@ -35,7 +35,7 @@ services:
       - mongo
 
   traefik:
-    image: traefik:latest
+    image: traefik:1.6.4
     restart: unless-stopped
     command: traefik --web --docker --defaultentrypoints=http --entryPoints='Name:http Address::3000'
     ports:

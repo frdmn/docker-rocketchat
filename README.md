@@ -127,6 +127,15 @@ You can also make use of the following environment variables:
 - `IMPORTFILE`: The filename of the dump that you want to import
 - `GZIP`: Set to `true` if you want to compress your export
 
+##### Skip installation wizard
+
+You can skip the initial installation wizard/guide by adding the following environment variables to your application container:
+
+```
+- ADMIN_USERNAME=${USERNAME}
+- ADMIN_PASS=${PASSWORD}
+- ADMIN_EMAIL=${EMAIL}
+- OVERWRITE_SETTING_Show_Setup_Wizard=completed
 ```
 
 ## Contributing

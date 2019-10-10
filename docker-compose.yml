@@ -23,7 +23,7 @@ services:
   mongo:
     image: mongo:3.6
     restart: unless-stopped
-    command: mongod --smallfiles --oplogSize 128 --replSet rs0
+    command: mongod --smallfiles --oplogSize 128 --replSet rs0 --storageEngine=mmapv1
     volumes:
       - ./data/db:/data/db
       - ./data/backups:/dump

@@ -127,6 +127,16 @@ You can also make use of the following environment variables:
 - `IMPORTFILE`: The filename of the dump that you want to import
 - `GZIP`: Set to `true` if you want to compress your export
 
+## Troubleshooting
+
+### `Error: $MONGO_OPLOG_URL must be set to the 'local' database of a Mongo replica set`
+
+This message will be thrown by the application container, if you initially start up (and create) the containers but the replica set was not yet fully configured. Just wait a bit until the replica set was setup in the background. The application will retry the connection periodically and will succeed once the replica set is up.
+
+### `MongoError: not master and slaveOk=false`
+
+The initial database seed is probably not yet fully imported into your MongoDB. As above, wait a bit until it's processed in the background.
+
 ## Contributing
 
 1. Fork it

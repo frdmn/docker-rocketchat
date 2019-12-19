@@ -4,7 +4,14 @@ services:
   rocketchat:
     image: rocketchat/rocket.chat:2.3.2
     restart: unless-stopped
-    command: /bin/sh -c 'INSTANCE_IP=$$(hostname -i) node main.js'
+    command: >
+      bash -c
+        "for i in `seq 1 30`; do
+          node main.js &&
+          s=$$? && break || s=$$?;
+          echo \"Tried $$i times. Waiting 5 secs...\";
+          sleep 5;
+        done; (exit $$s)"
     mem_limit: 4G
     volumes:
      - ./data/uploads:/app/uploads

@@ -66,21 +66,21 @@ services:
    volumes:
      - /var/run/docker.sock:/var/run/docker.sock
 
-# hubot:
-#   image: rocketchat/hubot-rocketchat:1.0.8
-#   restart: unless-stopped
-#   environment:
-#     - MONGODB_URL=mongodb://mongo:27017/hubot-brain
-#     - ROCKETCHAT_URL=rocketchat:3000
-#     - ROCKETCHAT_ROOM=${ROCKETCHAT_ROOM}
-#     - ROCKETCHAT_USER=${ROCKETCHAT_USER}
-#     - ROCKETCHAT_PASSWORD=${ROCKETCHAT_PASSWORD}
-#     - BOT_NAME=${BOT_NAME}
-#     - EXTERNAL_SCRIPTS=${EXTERNAL_SCRIPTS}
-#     - TZ=${TZ}
-#   links:
-#     - rocketchat:rocketchat
-#   volumes:
-#     - ./data/hubotscripts:/home/hubot/scripts
-#   ports:
-#     - 3001:8081
+  # hubot:
+  #   image: rocketchat/hubot-rocketchat:v1.0.11
+  #   restart: unless-stopped
+  #   environment:
+  #     - MONGODB_URL=mongodb://mongo:27017/hubot-brain
+  #     - ROCKETCHAT_URL=rocketchat:3000
+  #     - ROCKETCHAT_ROOM=${ROCKETCHAT_ROOM}
+  #     - ROCKETCHAT_USER=${ROCKETCHAT_USER}
+  #     - ROCKETCHAT_PASSWORD=${ROCKETCHAT_PASSWORD}
+  #     - BOT_NAME=${BOT_NAME}
+  #     - EXTERNAL_SCRIPTS=${EXTERNAL_SCRIPTS}
+  #     - TZ=${TZ}
+  #   depends_on:
+  #     - rocketchat
+  #   volumes:
+  #     - ./data/hubotscripts:/home/hubot/scripts
+  #   ports:
+  #     - 3001:8081

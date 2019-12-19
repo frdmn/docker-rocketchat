@@ -52,10 +52,14 @@ docker-compose up -d rocketchat
 This service file supports the `docker-compose` builtin scaling. For example to add 3 additional application containers you can simply invoke:
 
 ```
-$ docker-compose scale rocketchat=4
-Creating and starting dev_rocketchat_2 ... done
-Creating and starting dev_rocketchat_3 ... done
-Creating and starting dev_rocketchat_4 ... done
+$ docker-compose up -d --scale rocketchat=4
+Starting 185_docker-rocketchat_traefik_1            ... done
+Starting 185_docker-rocketchat_mongo_1              ... done
+Starting 185_docker-rocketchat_mongo-init-replica_1 ... done
+Starting 185_docker-rocketchat_rocketchat_1         ... done
+Creating 185_docker-rocketchat_rocketchat_2         ... done
+Creating 185_docker-rocketchat_rocketchat_3         ... done
+Creating 185_docker-rocketchat_rocketchat_4         ... done
 ```
 
 Last but not least restart _traefik_ (the load balancer) to make sure it knows about the newly added application containers:

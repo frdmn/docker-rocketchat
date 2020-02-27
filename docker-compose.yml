@@ -53,17 +53,17 @@ services:
       - mongo
 
   traefik:
-   image: traefik:v2.1.1
-   restart: unless-stopped
-   command:
+    image: traefik:v2.1.1
+    restart: unless-stopped
+    command:
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:3000"
-   ports:
+    ports:
      - 3000:3000
      - 8080:8080
-   volumes:
+    volumes:
      - /var/run/docker.sock:/var/run/docker.sock
 
   # hubot:

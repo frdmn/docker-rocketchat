@@ -21,6 +21,9 @@ services:
      - ROOT_URL=http://${ROCKETCHAT_HOST}
      - MONGO_URL=mongodb://mongo:27017/rocketchat
      - MONGO_OPLOG_URL=mongodb://mongo:27017/local
+     - SETTINGS_BLOCKED=Prometheus_Enabled,Prometheus_Port
+     - Prometheus_Enabled=true
+     - Prometheus_Port=9458
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.rocketchat.rule=Host(`${ROCKETCHAT_HOST}`)"

@@ -14,5 +14,9 @@ data/uploads/*
 data/backups/*
 !data/backups/.gitkeep
 
+# ... Prometheus monitoring data
+data/prometheus/*
+!data/prometheus/.gitkeep
+
 # Environment variables
 .env

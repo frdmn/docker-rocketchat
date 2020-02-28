@@ -132,6 +132,20 @@ You can also make use of the following environment variables:
 - `IMPORTFILE`: The filename of the dump that you want to import
 - `GZIP`: Set to `true` if you want to compress your export
 
+### Monitoring
+
+![](https://i.imgur.com/lghiEqB.png)
+
+If you want to monitor Rocket.Chat on application level, you can make use of the preconfigured stack from the `docker-compose.monitoring.yml` file. To spin up the necessary containers (Grafana, Prometheus, cAdvisor and node-exporter) include the compose file in your "docker-compose" command chain - just as the Hubot inclusion above:
+
+```
+docker-compose -f docker-compose.yml -f docker-compose.monitoring.yml up -d
+```
+
+As soon as the containers are started, you can visit <http://${HOST_IP}:3000> in your browser to access the Grafana platform. The dashboards are automatically added upon first start.
+
+> Note: The Rocket.Chat dashboards ("Rocket.Chat Metrics" and "Rocket.Chat Metrics Simple") in the screenshot above is not yet released for the public. You have to adjust the graphs on your own for now.
+
 ## Troubleshooting
 
 ### `Error: $MONGO_OPLOG_URL must be set to the 'local' database of a Mongo replica set`

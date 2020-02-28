@@ -1,0 +1,14 @@
+scrape_configs:
+- job_name: cadvisor
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - cadvisor:8080
+    - node-exporter:9100
+
+- job_name: rocketchat
+  scrape_interval: 30s
+  dns_sd_configs:
+  - names: ["rocketchat"]
+    type: A
+    port: 9458

@@ -7,23 +7,25 @@ My `docker-compose.yml` file/setup to run [Rocket.Chat](https://rocket.chat) in 
 1. Make sure you've installed Docker including `docker-compose` support.
 2. Clone this repository:
 
-```shell
-git clone https://github.com/frdmn/docker-rocketchat /opt/docker/Rocket.Chat
-cd /opt/docker/Rocket.Chat
-```
+    ```shell
+    git clone https://github.com/frdmn/docker-rocketchat /opt/docker/Rocket.Chat
+    cd /opt/docker/Rocket.Chat
+    ```
 
 3. Copy and adjust the default environment variables from `.env.sample`:
 
-```shell
-cp .env.sample .env
-vi .env
-```
+    ```shell
+    cp .env.sample .env
+    vi .env
+    ```
 
 4. Create and start up containers using `docker-compose`:
 
-```
-docker-compose up -d
-```
+    ```
+    docker-compose up -d
+    ```
+
+5. Access your Rocket.Chat instance via <http://${HOST_IP}:3000>.
 
 ## Usage
 
@@ -161,21 +163,21 @@ The initial database seed is probably not yet fully imported into your MongoDB. 
 1. Fork it
 2. Create your feature branch:
 
-```shell
-git checkout -b feature/my-new-feature
-```
+    ```shell
+    git checkout -b feature/my-new-feature
+    ```
 
 3. Commit your changes:
 
-```shell
-git commit -am 'Add some feature'
-```
+    ```shell
+    git commit -am 'Add some feature'
+    ```
 
 4. Push to the branch:
 
-```shell
-git push origin feature/my-new-feature
-```
+    ```shell
+    git push origin feature/my-new-feature
+    ```
 
 5. Submit a pull request
 

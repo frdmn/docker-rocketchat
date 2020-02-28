@@ -25,7 +25,7 @@ My `docker-compose.yml` file/setup to run [Rocket.Chat](https://rocket.chat) in 
     docker-compose up -d
     ```
 
-5. Access your Rocket.Chat instance via <http://${HOST_IP}:3000>.
+5. Access your Rocket.Chat instance via `http://${HOST_IP}:3000`.
 
 ## Usage
 
@@ -144,7 +144,7 @@ If you want to monitor Rocket.Chat on application level, you can make use of the
 docker-compose -f docker-compose.yml -f docker-compose.monitoring.yml up -d
 ```
 
-As soon as the containers are started, you can visit <http://${HOST_IP}:3000> in your browser to access the Grafana platform. The dashboards are automatically added upon first start.
+As soon as the containers are started, you can visit `http://${HOST_IP}:3000` in your browser to access the Grafana platform. The dashboards are automatically added upon first start.
 
 > Note: The Rocket.Chat dashboards ("Rocket.Chat Metrics" and "Rocket.Chat Metrics Simple") in the screenshot above is not yet released for the public. You have to adjust the graphs on your own for now.
 

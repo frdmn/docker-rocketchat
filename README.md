@@ -72,15 +72,14 @@ $ docker-compose restart traefik
 
 #### Installation / Setup
 
-If you want to use Hubot, you can use the provided container in the `docker-compose.yml`:
+If you want to use Hubot, you can use the provided container in the `docker-compose.hubot.yml`:
 
 1. Create a new user in your Rocket.Chat instance which Hubot can use to sign in.
-2. Open the `docker-compose.yml` and uncomment the Hubot service at the very bottom. (Remove the `#` signs)
-3. Adjust the related environment variables in your `.env` file to match your previously created user credentials.
-4. Save the file and create the Hubot container:
+2. Adjust the related environment variables in your `.env` file to match your previously created user credentials.
+3. Save the file and create the Hubot container, make sure to include _both_ the regular `docker-compose.yml` and the `docker-compose.hubot.yml` file into your command:
 
 ```
-docker-compose up -d hubot
+docker-compose -f docker-compose.yml -f docker-compose.hubot.yml up -d hubot
 ```
 
 #### Custom Hubot scripts

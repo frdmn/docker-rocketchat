@@ -82,6 +82,8 @@ If you want to use Hubot, you can use the provided container in the `docker-comp
 docker-compose -f docker-compose.yml -f docker-compose.hubot.yml up -d hubot
 ```
 
+> Note: If you decide to use Hubot and include it's `docker-compose.hubot.yml`, make sure to use the `$ docker-compose -f docker-compose.yml -f docker-compose.hubot.yml ...` command syntax from now on for any other task, to make sure your container stack always includes all containers - including Hubot!
+
 #### Custom Hubot scripts
 
 Right now you can either use the `EXTERNAL_SCRIPTS` environment variable within the Hubot Docker container to install NPM-registered scripts or you can use the mounted `./data/hubotscripts` volume to load your local scripts.

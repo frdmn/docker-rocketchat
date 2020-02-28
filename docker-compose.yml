@@ -62,9 +62,11 @@ services:
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:3000"
+      - "--entrypoints.web.address=:${ROCKETCHAT_PORT}"
     ports:
-     - 3000:3000
-     - 8080:8080
+     - ${ROCKETCHAT_PORT}:3000
+     - ${TRAEFIK_DASHBOARD_PORT}:8080
     volumes:
      - /var/run/docker.sock:/var/run/docker.sock:ro
+    depends_on:
+      - rocketchat

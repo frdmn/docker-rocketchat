@@ -1,6 +1,6 @@
 # docker-rocketchat
 
-My `docker-compose.yml` file/setup to run [Rocket.Chat](https://rocket.chat) in production.
+My `docker-compose.yml` file/setup to run [Rocket.Chat](https://rocket.chat) in production. Optional containers for Hubot and a complete application monitoring stack available as well.
 
 ## Installation
 
@@ -41,9 +41,6 @@ To update your Rocket.Chat server you simply need to make sure the `docker-compo
 
 ```
 git pull
-docker-compose pull rocketchat
-docker-compose stop rocketchat
-docker-compose rm rocketchat
 docker-compose up -d rocketchat
 ```
 

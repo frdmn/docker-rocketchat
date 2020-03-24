@@ -135,15 +135,9 @@ You can also make use of the following environment variables:
 
 ![](https://i.imgur.com/lghiEqB.png)
 
-If you want to monitor Rocket.Chat on application level, you can make use of the preconfigured stack from the `docker-compose.monitoring.yml` file. To spin up the necessary containers (Grafana, Prometheus, cAdvisor and node-exporter) include the compose file in your "docker-compose" command chain - just as the Hubot inclusion above:
+If you want to monitor Rocket.Chat on application level, you can make use of the preconfigured stack from the `docker-compose.monitoring.yml` file. To spin up the necessary containers (Grafana, Prometheus, cAdvisor and node-exporter), take a look into the Rocket.Chat.Metrics repository:
 
-```
-docker-compose -f docker-compose.yml -f docker-compose.monitoring.yml up -d
-```
-
-As soon as the containers are started, you can visit `http://${HOST_IP}:3300` in your browser to access the Grafana platform. The dashboards are automatically added upon first start.
-
-> Note: The Rocket.Chat dashboards ("Rocket.Chat Metrics" and "Rocket.Chat Metrics Simple") in the screenshot above is not yet released for the public. You have to adjust the graphs on your own for now.
+https://github.com/RocketChat/Rocket.Chat.Metrics
 
 ## Troubleshooting
 

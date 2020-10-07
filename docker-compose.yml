@@ -2,7 +2,7 @@ version: '2'
 
 services:
   rocketchat:
-    image: rocketchat/rocket.chat:3.5.3
+    image: rocketchat/rocket.chat:3.6.3
     restart: unless-stopped
     command: >
       bash -c

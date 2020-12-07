@@ -30,7 +30,7 @@ services:
   mongo:
     image: mongo:4.0
     restart: unless-stopped
-    command: mongod --smallfiles --oplogSize 128 --replSet rs0
+    command: mongod --oplogSize 128 --replSet rs0
     volumes:
       - ./data/db:/data/db
       - ./data/backups:/dump

@@ -12,7 +12,6 @@ services:
           echo \"Tried $$i times. Waiting 5 secs...\";
           sleep 5;
         done; (exit $$s)"
-    mem_limit: 4G
     volumes:
      - ./data/uploads:/app/uploads
      - /tmp:/tmp

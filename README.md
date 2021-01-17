@@ -149,6 +149,19 @@ This message will be thrown by the application container, if you initially start
 
 The initial database seed is probably not yet fully imported into your MongoDB. As above, wait a bit until it's processed in the background.
 
+### `MongoError: Can’t find migration version 202`
+
+Downgrade db migrations version to 197.
+
+ ```shell
+ docker exec -i -t CONTAINER_MONGODB_NAME bash
+ mongo
+ use admin
+ db.migrations.update({}, {$set: {version: 197, locked: false}})
+ exit
+ exit
+ ```
+
 ## Contributing
 
 1. Fork it

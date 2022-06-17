@@ -10,6 +10,7 @@ if [[ "${GZIP}" == "true" ]]; then
 	GZIP=" --gzip"
 fi
 
-docker-compose run --rm ${MONGO_CONTAINER} mongorestore -h mongo --drop --archive=/dump/${IMPORTFILE}${GZIP}
+docker-compose exec ${MONGO_CONTAINER} mongorestore -h mongo --drop --archive=/dump/${IMPORTFILE}${GZIP} --noIndexRestore
+docker-compose exec ${MONGO_CONTAINER} mongo --eval 'db.repairDatabase()'
 
 exit 0

@@ -2,7 +2,7 @@ version: '2'
 
 services:
   rocketchat:
-    image: rocketchat/rocket.chat:3.7.1
+    image: rocketchat/rocket.chat:4.8.1
     restart: unless-stopped
     command: >
       bash -c
@@ -28,7 +28,7 @@ services:
       - mongo
 
   mongo:
-    image: mongo:4.0
+    image: mongo:4.4
     restart: unless-stopped
     command: mongod --oplogSize 128 --replSet rs0
     volumes:
@@ -36,7 +36,7 @@ services:
       - ./data/backups:/dump
 
   mongo-init-replica:
-    image: mongo:4.0
+    image: mongo:4.4
     command: >
       bash -c
         "for i in `seq 1 30`; do

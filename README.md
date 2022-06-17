@@ -67,26 +67,6 @@ Last but not least restart _traefik_ (the load balancer) to make sure it knows a
 $ docker-compose restart traefik
 ```
 
-### Hubot
-
-#### Installation / Setup
-
-If you want to use Hubot, you can use the provided container in the `docker-compose.hubot.yml`:
-
-1. Create a new user in your Rocket.Chat instance which Hubot can use to sign in.
-2. Adjust the related environment variables in your `.env` file to match your previously created user credentials.
-3. Save the file and create the Hubot container, make sure to include _both_ the regular `docker-compose.yml` and the `docker-compose.hubot.yml` file into your command:
-
-```
-docker-compose -f docker-compose.yml -f docker-compose.hubot.yml up -d hubot
-```
-
-> Note: If you decide to use Hubot and include it's `docker-compose.hubot.yml`, make sure to use the `$ docker-compose -f docker-compose.yml -f docker-compose.hubot.yml ...` command syntax from now on for any other task, to make sure your container stack always includes all containers - including Hubot!
-
-#### Custom Hubot scripts
-
-Right now you can either use the `EXTERNAL_SCRIPTS` environment variable within the Hubot Docker container to install NPM-registered scripts or you can use the mounted `./data/hubotscripts` volume to load your local scripts.
-
 ### MongoDB
 
 #### Replica set?

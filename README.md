@@ -81,10 +81,6 @@ $ docker-compose restart traefik
 
 ### MongoDB
 
-#### Replica set?
-
-You probably already noticed the `mongo-init-replica` container. It is necessary to create the replica set in your MongoDB container and executed only once when you spin up the `docker-compose.yml` file initially. The replica set is necessary to run Rocket.Chat across several instances. (see [Scaling](#scaling-in-case-of-performance-issues))
-
 #### Backup and restore
 
 ##### Create a backup

@@ -1,68 +1,49 @@
-version: '2'
+version: "3.7"
 
 services:
   rocketchat:
-    image: rocketchat/rocket.chat:4.8.1
+    image: registry.rocket.chat/rocketchat/rocket.chat:4.8.1
     restart: unless-stopped
-    command: >
-      bash -c
-        "for i in `seq 1 30`; do
-          INSTANCE_IP=$$(hostname -i) node main.js &&
-          s=$$? && break || s=$$?;
-          echo \"Tried $$i times. Waiting 5 secs...\";
-          sleep 5;
-        done; (exit $$s)"
     volumes:
      - ./data/uploads:/app/uploads
-     - /tmp:/tmp
     environment:
-     - PORT=3000
-     - ROOT_URL=http://${ROCKETCHAT_HOST}
-     - MONGO_URL=mongodb://mongo:27017/rocketchat
-     - MONGO_OPLOG_URL=mongodb://mongo:27017/local
+      MONGO_URL: "mongodb://mongodb:27017/rocketchat?replicaSet=rs0"
+      MONGO_OPLOG_URL: "mongodb://mongodb:27017/local?replicaSet=rs0"
+      ROOT_URL: "http://${ROCKETCHAT_HOST}:3000"
+      PORT: 3000
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.rocketchat.rule=Host(`${ROCKETCHAT_HOST}`)"
-      - "traefik.http.routers.rocketchat.entrypoints=web"
+      traefik.enable: true
+      traefik.http.routers.rocketchat.rule: Host(`${ROCKETCHAT_HOST}`)
+      traefik.http.routers.rocketchat.entrypoints: http
     depends_on:
-      - mongo
+      - mongodb
 
-  mongo:
-    image: mongo:4.4
+  mongodb:
+    image: docker.io/bitnami/mongodb:4.4
     restart: unless-stopped
-    command: mongod --oplogSize 128 --replSet rs0
     volumes:
-      - ./data/db:/data/db
-      - ./data/backups:/dump
-
-  mongo-init-replica:
-    image: mongo:4.4
-    command: >
-      bash -c
-        "for i in `seq 1 30`; do
-          mongo mongo/rocketchat --eval \"
-            rs.initiate({
-              _id: 'rs0',
-              members: [ { _id: 0, host: 'localhost:27017' } ]})\" &&
-          s=$$? && break || s=$$?;
-          echo \"Tried $$i times. Waiting 5 secs...\";
-          sleep 5;
-        done; (exit $$s)"
-    depends_on:
-      - mongo
+      - ./data/db:/bitnami/mongodb
+    environment:
+      MONGODB_REPLICA_SET_MODE: primary
+      MONGODB_REPLICA_SET_NAME: rs0
+      MONGODB_PORT_NUMBER: 27017
+      MONGODB_INITIAL_PRIMARY_HOST: mongodb
+      MONGODB_INITIAL_PRIMARY_PORT_NUMBER: 7017
+      MONGODB_ADVERTISED_HOSTNAME: mongodb
+      MONGODB_ENABLE_JOURNAL: true
+      ALLOW_EMPTY_PASSWORD: yes
 
   traefik:
-    image: traefik:v2.1.1
+    image: docker.io/traefik:v2.6.1
     restart: unless-stopped
     command:
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:${ROCKETCHAT_PORT}"
+      - --api.insecure=false
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.http.address=:${ROCKETCHAT_PORT}
     ports:
      - ${ROCKETCHAT_PORT}:3000
      - ${TRAEFIK_DASHBOARD_PORT}:8080
     volumes:
-     - /var/run/docker.sock:/var/run/docker.sock:ro
-    depends_on:
-      - rocketchat
+      - ./data/letsencrypt:/letsencrypt:rw
+      - ${DOCKER_SOCKET}:/var/run/docker.sock:ro

@@ -10,5 +10,6 @@ data/uploads/*
 data/backups/*
 !data/backups/.gitkeep
 
-# Environment variables
+# Customized environment variables / overrides
+docker-compose.override.yml
 .env

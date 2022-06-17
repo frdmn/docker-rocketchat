@@ -19,21 +19,33 @@ My `docker-compose.yml` file/setup to run [Rocket.Chat](https://rocket.chat) in 
     vi .env
     ```
 
-4. Create and start up containers using `docker-compose`:
+4. In case you want to use Traefik as reverse proxy with built-in LetsEncrypt TLS support:
+
+    ```shell
+    cp docker-compose.override.https+letsencrypt.yml docker-compose.override.yml
+    ```
+
+5. Create and start up containers using `docker-compose`:
 
     ```
     docker-compose up -d
     ```
 
-5. Access your Rocket.Chat instance via `http://${HOST_IP}:3000`.
+6. Access your Rocket.Chat instance via `http://${HOST_IP}:3000`.
 
 ## Usage
 
-### Why port 3000? How to add SSL?
+### Choosing the right reverse proxy
 
-Port 3000, because this project comes with a load balancer container which is exposed on port 3000. This load balancer manages the traffic between our application containers, no matter how many we scale up.
+To allow realtime scaling of Rocket.Chat application containers, we need a reverse proxy that supports Docker-based container load balancing. Traefik is the one that Rocket.Chat recommends for such purposes. Traefik supports LetsEncrypt out of the box, which can be used to automatically issue and configure a free SSL certificate for your Rocket.Chat server. If you rather want to use your own reverse proxy solution, take a look at the chapter below "External (Nginx, Apache, Caddy)".
 
-In production you probably still want to use the default HTTP/HTTPS ports, right? To do that simply add your reverse proxy by choice and redirect the traffic to the _traefik_ listener. This reverse proxy can also be used to terminate your SSL connections.
+#### Traefik (built-in)
+
+If you decide for the built-in Traefik proxy, copy the `docker-compose.override.https+letsencrypt.yml` to `docker-compose.override.yml`. This will make Traefik listen on TCP 80 and 443 (default HTTP and HTTPS ports) while trying to request a certificate for the hostname in question (`$ROCKETCHAT_HOST`).
+
+#### External (Nginx, Apache, Caddy)
+
+If you rather want to use your own reverse proxy, like Nginx, Apache or Caddy, you can use skip the inclusion of the override file (`docker-compose.override.https+letsencrypt.yml`) and use just the regular `docker-compose.yml`. This makes Traefik listen only on the HTTP port specified via `${ROCKETCHAT_PORT}` (3000 by default, can be changed by adjusting accordingly in the `.env` file).
 
 ### Upgrade to a new Rocket.Chat version
 
@@ -66,26 +78,6 @@ Last but not least restart _traefik_ (the load balancer) to make sure it knows a
 ```
 $ docker-compose restart traefik
 ```
-
-### Hubot
-
-#### Installation / Setup
-
-If you want to use Hubot, you can use the provided container in the `docker-compose.hubot.yml`:
-
-1. Create a new user in your Rocket.Chat instance which Hubot can use to sign in.
-2. Adjust the related environment variables in your `.env` file to match your previously created user credentials.
-3. Save the file and create the Hubot container, make sure to include _both_ the regular `docker-compose.yml` and the `docker-compose.hubot.yml` file into your command:
-
-```
-docker-compose -f docker-compose.yml -f docker-compose.hubot.yml up -d hubot
-```
-
-> Note: If you decide to use Hubot and include it's `docker-compose.hubot.yml`, make sure to use the `$ docker-compose -f docker-compose.yml -f docker-compose.hubot.yml ...` command syntax from now on for any other task, to make sure your container stack always includes all containers - including Hubot!
-
-#### Custom Hubot scripts
-
-Right now you can either use the `EXTERNAL_SCRIPTS` environment variable within the Hubot Docker container to install NPM-registered scripts or you can use the mounted `./data/hubotscripts` volume to load your local scripts.
 
 ### MongoDB
 

@@ -1,0 +1,21 @@
+services:
+  rocketchat:
+    labels:
+      traefik.http.routers.rocketchat.tls: true
+      traefik.http.routers.rocketchat.entrypoints: https
+      traefik.http.routers.rocketchat.tls.certresolver: le
+
+  traefik:
+    command:
+      - --api.insecure=false
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.http.address=:80
+      - --entrypoints.https.address=:443
+      - --certificatesresolvers.le.acme.tlschallenge=true
+      - --certificatesresolvers.le.acme.email=${LETSENCRYPT_EMAIL}
+      - --certificatesresolvers.le.acme.storage=/letsencrypt/acme.json
+    ports:
+     - 80:80
+     - 443:443
+     - ${TRAEFIK_DASHBOARD_PORT}:8080

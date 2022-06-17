@@ -6,6 +6,6 @@ if [[ -n "${GZIP}" ]]; then
 	GZIP=" --gzip"
 fi
 
-eval "docker-compose run --rm ${MONGO_CONTAINER} mongodump -h mongo --archive=/dump/${TIMESTAMP}.json${GZIP}"
+docker-compose exec ${MONGO_CONTAINER} mongodump -h mongo --archive=/dump/${TIMESTAMP}.json${GZIP}
 
 exit 0
